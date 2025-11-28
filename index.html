@@ -41,7 +41,7 @@
                         `;
 
                         // 🔄 Enviar ubicación a tu backend en Node.js
-                        fetch("http://localhost:3000/ubicacion", {
+                        fetch("http://192.168.1.2:3000/ubicacion", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
