@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubicación del Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>📍 Obtener mi ubicación</h2>
+    <a href="#" onclick="obtenerUbicacion()">Haz clic aquí para mostrar tu ubicación</a>
+    <p id="resultado"></p>
+
+    <script>
+        function obtenerUbicacion() {
+            const resultado = document.getElementById("resultado");
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(posicion) {
+                        const lat = posicion.coords.latitude;
+                        const lon = posicion.coords.longitude;
+                        resultado.innerHTML = `
+                            Tu ubicación es:<br>
+                            Latitud: ${lat}<br>
+                            Longitud: ${lon}<br>
+                            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">
+                                Ver en Google Maps
+                            </a>
+                        `;
+                    },
+                    function(error) {
+                        const mensajes = {
+                            1: "El usuario negó el permiso de ubicación.",
+                            2: "La información de ubicación no está disponible.",
+                            3: "La solicitud de ubicación expiró."
+                        };
+                        resultado.innerHTML = mensajes[error.code] || "Ocurrió un error desconocido.";
+                    }
+                );
+            } else {
+                resultado.innerHTML = "La geolocalización no es soportada por este navegador.";
+            }
+        }
+    </script>
+</body>
+</html>
