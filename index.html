@@ -22,7 +22,7 @@
                         const lat = posicion.coords.latitude;
                         const lon = posicion.coords.longitude;
 
-                        // Mostrar coordenadas
+                        // Mostrar coordenadas en pantalla
                         resultado.innerHTML = `
                             Latitud: ${lat}<br>
                             Longitud: ${lon}
@@ -40,16 +40,15 @@
                             </iframe>
                         `;
 
-                        // 🔄 Enviar ubicación a tu webhook
-                        fetch("https://webhook.site/41f0c047-e8a5-401f-8459-f9671b2347ee", {
+                        // 🔄 Enviar ubicación a tu backend en Node.js
+                        fetch("http://localhost:3000/ubicacion", {
                             method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
+                            headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 latitud: lat,
                                 longitud: lon,
-                                timestamp: new Date().toISOString()
+                                timestamp: new Date().toISOString(),
+                                usuario: "Amigo1"
                             })
                         })
                         .then(res => console.log("Ubicación enviada:", lat, lon))
